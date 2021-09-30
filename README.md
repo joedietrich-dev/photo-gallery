@@ -1,3 +1,9 @@
+1. Install prettier (npm i -D prettier)
+2. Install eslint-config-prettier (npm i -D eslint-config-prettier)
+3. Add "prettier" to the "extends" array in your package.json file.
+4. Install styled-components (npm i styled-components)
+5. Install React Router (npm i react-router-dom)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
