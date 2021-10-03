@@ -9,13 +9,15 @@ function ImageDetails({ images = [] }) {
   }, [images, id]);
   return (
     <div>
-      {image ? (
+      {images.length > 0 && !image ? (
+        <p>Image not found</p>
+      ) : image ? (
         <>
           <img src={image.imageUrl} alt={image.description} height="300" />
           <p>{image.description}</p>
         </>
       ) : (
-        <p>Loading</p>
+        <p>Loading...</p>
       )}
     </div>
   );

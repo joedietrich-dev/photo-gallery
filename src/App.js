@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, NavLink, Link } from "react-router-dom";
 import "./App.css";
 import Gallery from "./components/Gallery";
 import Header from "./components/Header";
 import ImageDetails from "./components/ImageDetails";
 import Main from "./components/Main";
 import NewPhoto from "./components/NewPhoto";
+import styled from "styled-components/macro";
+import ActionButton from "./components/ActionButton";
 
 function App() {
   const [images, setImages] = useState([]);
@@ -14,9 +16,13 @@ function App() {
       .then((res) => res.json())
       .then(setImages);
   }, []);
+
+  const handleAddImage = (image) => {
+    setImages([...images, image]);
+  };
   return (
     <Router>
-      <div className="App">
+      <AppContainer>
         <Header>
           <NavLink to="/new">New Photo</NavLink>
           &nbsp;||&nbsp;
@@ -25,7 +31,7 @@ function App() {
         <Main>
           <Switch>
             <Route path="/new">
-              <NewPhoto />
+              <NewPhoto handleAddImage={handleAddImage} />
             </Route>
             <Route path="/image/:id">
               <ImageDetails images={images} />
@@ -34,10 +40,21 @@ function App() {
               <Gallery images={images} />
             </Route>
           </Switch>
+          <Link to="/new">
+            <ActionButton>+</ActionButton>
+          </Link>
         </Main>
-      </div>
+      </AppContainer>
     </Router>
   );
 }
+
+const AppContainer = styled.div`
+  height: 100vh;
+  display: grid;
+  grid:
+    "header" auto
+    "main" 1fr / 100%;
+`;
 
 export default App;
