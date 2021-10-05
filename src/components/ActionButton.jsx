@@ -15,10 +15,10 @@ const ActionButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: green;
+    background: hsl(0.3turn 25% 55% / 1);
   }
   &:active {
-    background: white;
+    background: hsl(0.3turn 25% 85% / 1);
   }
 `;
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, NavLink, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import "./App.css";
 import Gallery from "./components/Gallery";
 import Header from "./components/Header";
@@ -7,18 +7,21 @@ import ImageDetails from "./components/ImageDetails";
 import Main from "./components/Main";
 import NewPhoto from "./components/NewPhoto";
 import styled from "styled-components/macro";
-import ActionButton from "./components/ActionButton";
+import AddImageActionArea from "./components/AddImageActionArea";
 
 function App() {
   const [images, setImages] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3001/images")
+    fetch(`${process.env.REACT_APP_ENDPOINT_URL}/images`)
       .then((res) => res.json())
       .then(setImages);
   }, []);
 
   const handleAddImage = (image) => {
     setImages([...images, image]);
+  };
+  const handleDeleteImage = (deletedImage) => {
+    setImages(images.filter((image) => image.id !== deletedImage.id));
   };
   return (
     <Router>
@@ -34,15 +37,13 @@ function App() {
               <NewPhoto handleAddImage={handleAddImage} />
             </Route>
             <Route path="/image/:id">
-              <ImageDetails images={images} />
+              <ImageDetails images={images} handleDeleteImage={handleDeleteImage} />
             </Route>
             <Route path="/">
               <Gallery images={images} />
             </Route>
           </Switch>
-          <Link to="/new">
-            <ActionButton>+</ActionButton>
-          </Link>
+          <AddImageActionArea handleAddImage={handleAddImage} />
         </Main>
       </AppContainer>
     </Router>
