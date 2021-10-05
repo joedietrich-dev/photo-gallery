@@ -17,8 +17,8 @@ function NewPhoto({ handleAddImage }) {
   };
 
   const handleSubmit = (e) => {
-    console.log(e);
-    fetch("http://localhost:3001/images", {
+    e.preventDefault();
+    fetch(`${process.env.REACT_APP_ENDPOINT_URL}/images`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -27,7 +27,6 @@ function NewPhoto({ handleAddImage }) {
     })
       .then((res) => res.json())
       .then((newImage) => handleAddImage(newImage));
-    e.preventDefault();
     setNewPhoto(INITIAL_PHOTO);
   };
 

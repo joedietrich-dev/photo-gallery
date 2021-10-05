@@ -20,6 +20,9 @@ function App() {
   const handleAddImage = (image) => {
     setImages([...images, image]);
   };
+  const handleEditImage = (editedImage) => {
+    setImages(images.map((image) => (image.id === editedImage.id ? editedImage : image)));
+  };
   const handleDeleteImage = (deletedImage) => {
     setImages(images.filter((image) => image.id !== deletedImage.id));
   };
@@ -37,7 +40,7 @@ function App() {
               <NewPhoto handleAddImage={handleAddImage} />
             </Route>
             <Route path="/image/:id">
-              <ImageDetails images={images} handleDeleteImage={handleDeleteImage} />
+              <ImageDetails images={images} handleDeleteImage={handleDeleteImage} handleEditImage={handleEditImage} />
             </Route>
             <Route path="/">
               <Gallery images={images} />

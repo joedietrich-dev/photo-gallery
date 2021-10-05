@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { Switch, Route, useParams, useHistory, useRouteMatch, Link } from "react-router-dom";
+import ImageDetailsEdit from "./ImageDetailsEdit";
 
-function ImageDetails({ images = [], handleDeleteImage = (f) => f }) {
-  const { id } = useParams();
+function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditImage = (f) => f }) {
   const [image, setImage] = useState(null);
+  const { path, url } = useRouteMatch();
+  const { id } = useParams();
   const history = useHistory();
 
   useEffect(() => {
@@ -33,9 +35,18 @@ function ImageDetails({ images = [], handleDeleteImage = (f) => f }) {
       return (
         <>
           <img src={image.imageUrl} alt={image.description} height="300" />
-          <p>{image.description}</p>
-          <button>Edit</button>
-          <button onClick={handleDelete}>Delete</button>
+          <Switch>
+            <Route exact path={path}>
+              <div>
+                <p>{image.description}</p>
+                <Link to={`${url}/edit`}>Edit</Link>
+                <button onClick={handleDelete}>Delete</button>
+              </div>
+            </Route>
+            <Route path={`${path}/edit`}>
+              <ImageDetailsEdit image={image} handleEditImage={handleEditImage} />
+            </Route>
+          </Switch>
         </>
       );
     }
