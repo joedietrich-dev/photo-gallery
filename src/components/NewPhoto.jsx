@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components/macro";
 
 const INITIAL_PHOTO = {
   description: "",
@@ -31,16 +32,38 @@ function NewPhoto({ handleAddImage }) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="imageUrl">Image Url:</label>
-        <input id="imageUrl" type="url" value={newPhoto.imageUrl} onChange={handleFieldChange} />
-        <label htmlFor="description">Description:</label>
-        <input id="description" type="text" value={newPhoto.description} onChange={handleFieldChange} />
-        <input type="submit" />
-      </form>
-    </div>
+    <NewPhotoForm onSubmit={handleSubmit}>
+      <label htmlFor="imageUrl">Image Url:</label>
+      <input id="imageUrl" type="url" value={newPhoto.imageUrl} onChange={handleFieldChange} required />
+      <label htmlFor="description">Description:</label>
+      <textarea id="description" type="text" rows="3" value={newPhoto.description} onChange={handleFieldChange} />
+      <input type="submit" />
+    </NewPhotoForm>
   );
 }
+
+export const NewPhotoForm = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 2rem;
+
+  label {
+    margin-bottom: 0.25rem;
+  }
+  input:not([type="submit"]),
+  textarea {
+    margin-bottom: 0.75rem;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  input[type="submit"] {
+    padding: 0.25rem;
+  }
+`;
 
 export default NewPhoto;
