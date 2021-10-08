@@ -20,11 +20,11 @@ function Gallery({ images }) {
 
 const GalleryContainer = styled.div`
   width: calc(100% - 2rem);
-  display: flex;
-  flex-flow: row wrap;
-  gap: 2rem;
+  max-width: 1600px;
   margin: 0 auto;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
 `;
 
 const GalleryOverlayText = styled.p`
@@ -53,15 +53,9 @@ const GalleryImage = styled.img`
 `;
 
 const GalleryImageTile = styled.div`
-  flex: 1 1 calc(33% - 2rem);
-  min-width: 10rem;
-  min-height: 10rem;
   aspect-ratio: 1/1;
-  max-height: 20rem;
-  max-width: 20rem;
-
-  position: relative;
   border-radius: 2rem;
+  position: relative;
   overflow: hidden;
 
   &:hover ${GalleryOverlay} {

@@ -4,7 +4,7 @@ import styled from "styled-components/macro";
 const INITIAL_PHOTO = {
   description: "",
   imageUrl: "",
-  likes: 0,
+  favorite: false,
 };
 
 function NewPhoto({ handleAddImage }) {
