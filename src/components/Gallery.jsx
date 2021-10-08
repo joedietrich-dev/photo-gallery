@@ -7,7 +7,7 @@ function Gallery({ images }) {
       {images.map((image) => (
         <GalleryImageTile key={image.id}>
           <Link to={`/image/${image.id}`}>
-            <img src={image.imageUrl} alt={image.description} />
+            <GalleryImage src={image.imageUrl} alt={image.description} />
             <GalleryOverlay>
               <GalleryOverlayText>{image.description}</GalleryOverlayText>
             </GalleryOverlay>
@@ -19,7 +19,7 @@ function Gallery({ images }) {
 }
 
 const GalleryContainer = styled.div`
-  width: 100%;
+  width: calc(100% - 2rem);
   display: flex;
   flex-flow: row wrap;
   gap: 2rem;
@@ -42,22 +42,37 @@ const GalleryOverlay = styled.div`
   transition: 0.5s;
 `;
 
-const GalleryImageTile = styled.div`
-  flex: 0 1 20rem;
-  max-width: 100%;
-  height: 20rem;
+const GalleryImage = styled.img`
   position: relative;
-  border-radius: 10%;
-  overflow: hidden;
+  top: -0.25rem;
+  left: -0.25rem;
+  width: calc(100% + 0.5rem);
+  height: calc(100% + 0.5rem);
+  transition: 0.5s;
+  object-fit: cover;
+`;
 
-  & img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+const GalleryImageTile = styled.div`
+  flex: 1 1 calc(33% - 2rem);
+  min-width: 10rem;
+  min-height: 10rem;
+  aspect-ratio: 1/1;
+  max-height: 20rem;
+  max-width: 20rem;
+
+  position: relative;
+  border-radius: 2rem;
+  overflow: hidden;
 
   &:hover ${GalleryOverlay} {
     opacity: 100%;
+  }
+
+  &:hover ${GalleryImage} {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 `;
 
