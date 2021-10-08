@@ -33,6 +33,8 @@ function App() {
           <NavLink to="/new">New Photo</NavLink>
           &nbsp;||&nbsp;
           <NavLink to="/">Gallery</NavLink>
+          &nbsp;||&nbsp;
+          <NavLink to="/favorites">Favorites</NavLink>
         </Header>
         <Main>
           <Switch>
@@ -41,6 +43,9 @@ function App() {
             </Route>
             <Route path="/image/:id">
               <ImageDetails images={images} handleDeleteImage={handleDeleteImage} handleEditImage={handleEditImage} />
+            </Route>
+            <Route path="/favorites">
+              <Gallery images={images.filter((image) => image.favorite)} />
             </Route>
             <Route path="/">
               <Gallery images={images} />

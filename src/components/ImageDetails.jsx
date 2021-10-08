@@ -27,6 +27,18 @@ function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditIma
       .catch((err) => console.log(err));
   };
 
+  const handleFavorite = () => {
+    fetch(`${process.env.REACT_APP_ENDPOINT_URL}/images/${image.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ favorite: !image.favorite }),
+    })
+      .then((res) => res.json())
+      .then((favoritedImage) => handleEditImage(favoritedImage));
+  };
+
   const showDetails = () => {
     if (!image) {
       if (images.length > 0) return <p>Image not found</p>;
@@ -41,6 +53,7 @@ function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditIma
                 <p>{image.description}</p>
                 <Link to={`${url}/edit`}>Edit</Link>
                 <button onClick={handleDelete}>Delete</button>
+                <button onClick={handleFavorite}>{image.favorite ? "❤️" : "🤍"}</button>
               </div>
             </Route>
             <Route path={`${path}/edit`}>

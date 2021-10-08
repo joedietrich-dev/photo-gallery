@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 const Header = styled.header`
   grid-area: header;
   height: 2rem;
-  justify-self: center;
+  padding: 1rem;
 `;
 
 export default Header;

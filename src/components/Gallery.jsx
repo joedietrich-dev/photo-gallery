@@ -21,9 +21,9 @@ function Gallery({ images }) {
 const GalleryContainer = styled.div`
   width: calc(100% - 2rem);
   max-width: 1600px;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
   gap: 1rem;
 `;
 
