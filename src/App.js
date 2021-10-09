@@ -43,15 +43,17 @@ function App() {
             </Route>
             <Route path="/image/:id">
               <ImageDetails images={images} handleDeleteImage={handleDeleteImage} handleEditImage={handleEditImage} />
+              <AddImageActionArea handleAddImage={handleAddImage} />
             </Route>
             <Route path="/favorites">
               <Gallery images={images.filter((image) => image.favorite)} />
+              <AddImageActionArea handleAddImage={handleAddImage} />
             </Route>
             <Route path="/">
               <Gallery images={images} />
+              <AddImageActionArea handleAddImage={handleAddImage} />
             </Route>
           </Switch>
-          <AddImageActionArea handleAddImage={handleAddImage} />
         </Main>
       </AppContainer>
     </Router>

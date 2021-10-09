@@ -8,6 +8,7 @@ function Gallery({ images }) {
         <GalleryImageTile key={image.id}>
           <Link to={`/image/${image.id}`}>
             <GalleryImage src={image.imageUrl} alt={image.description} />
+            <GalleryLikeOverlay>{image.favorite ? "❤️" : "🤍"}</GalleryLikeOverlay>
             <GalleryOverlay>
               <GalleryOverlayText>{image.description}</GalleryOverlayText>
             </GalleryOverlay>
@@ -42,6 +43,22 @@ const GalleryOverlay = styled.div`
   transition: 0.5s;
 `;
 
+const GalleryLikeOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 0 1rem;
+  background: rgba(0, 0, 0, 0.75);
+  opacity: 0%;
+  transition: 0.5s;
+  font-size: 1.25rem;
+`;
+
 const GalleryImage = styled.img`
   position: relative;
   top: -0.25rem;
@@ -58,7 +75,7 @@ const GalleryImageTile = styled.div`
   position: relative;
   overflow: hidden;
 
-  &:hover ${GalleryOverlay} {
+  &:hover ${GalleryOverlay}, &:hover ${GalleryLikeOverlay} {
     opacity: 100%;
   }
 
