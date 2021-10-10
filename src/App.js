@@ -29,13 +29,7 @@ function App() {
   return (
     <Router>
       <AppContainer>
-        <Header>
-          <NavLink to="/new">New Photo</NavLink>
-          &nbsp;||&nbsp;
-          <NavLink to="/">Gallery</NavLink>
-          &nbsp;||&nbsp;
-          <NavLink to="/favorites">Favorites</NavLink>
-        </Header>
+        <Header />
         <Main>
           <Switch>
             <Route path="/new">
