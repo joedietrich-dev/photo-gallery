@@ -40,11 +40,11 @@ function App() {
               <AddImageActionArea handleAddImage={handleAddImage} />
             </Route>
             <Route path="/favorites">
-              <Gallery images={images.filter((image) => image.favorite)} />
+              <Gallery images={images.filter((image) => image.favorite)} handleEditImage={handleEditImage} />
               <AddImageActionArea handleAddImage={handleAddImage} />
             </Route>
             <Route path="/">
-              <Gallery images={images} />
+              <Gallery images={images} handleEditImage={handleEditImage} />
               <AddImageActionArea handleAddImage={handleAddImage} />
             </Route>
           </Switch>

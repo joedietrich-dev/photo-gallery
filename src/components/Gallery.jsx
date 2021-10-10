@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components/macro";
+import LikeButton, { LikeOverlay } from "./LikeButton";
 
-function Gallery({ images }) {
+function Gallery({ images = [], handleEditImage = (f) => f }) {
   return (
     <GalleryContainer>
       {images.map((image) => (
         <GalleryImageTile key={image.id}>
+          <LikeButton image={image} handleEditImage={handleEditImage} />
           <Link to={`/image/${image.id}`}>
             <GalleryImage src={image.imageUrl} alt={image.description} />
-            <GalleryLikeOverlay>{image.favorite ? "❤️" : "🤍"}</GalleryLikeOverlay>
             <GalleryOverlay>
               <GalleryOverlayText>{image.description}</GalleryOverlayText>
             </GalleryOverlay>
@@ -43,22 +44,6 @@ const GalleryOverlay = styled.div`
   transition: 0.5s;
 `;
 
-const GalleryLikeOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0 0 0 1rem;
-  background: rgba(0, 0, 0, 0.75);
-  opacity: 0%;
-  transition: 0.5s;
-  font-size: 1.25rem;
-`;
-
 const GalleryImage = styled.img`
   position: relative;
   top: -0.25rem;
@@ -75,7 +60,7 @@ const GalleryImageTile = styled.div`
   position: relative;
   overflow: hidden;
 
-  &:hover ${GalleryOverlay}, &:hover ${GalleryLikeOverlay} {
+  &:hover ${GalleryOverlay}, &:hover ${LikeOverlay} {
     opacity: 100%;
   }
 

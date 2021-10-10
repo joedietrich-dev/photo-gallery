@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Prompt } from "react-router-dom";
 
 function ImageDetailsEdit({ image, handleEditImage = (f) => f }) {
   const [photoDetails, setPhotoDetails] = useState({ description: image.description });
   const history = useHistory();
+
+  const hasFormChanged = photoDetails.description !== image.description;
 
   const handleFieldChange = (e) => {
     setPhotoDetails({
@@ -31,6 +33,7 @@ function ImageDetailsEdit({ image, handleEditImage = (f) => f }) {
       <label htmlFor="description">Description:</label>
       <input id="description" type="text" value={photoDetails.description} onChange={handleFieldChange} />
       <input type="submit" />
+      <Prompt when={hasFormChanged} message="Your changes will not be saved" />
     </form>
   );
 }
