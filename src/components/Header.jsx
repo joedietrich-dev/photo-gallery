@@ -13,17 +13,19 @@ function Header() {
       <h1>
         <Link to="/"> React Photo Gallery</Link>
       </h1>
-      <NavLink to="/new" activeStyle={activeStyle} exact>
-        New Photo
-      </NavLink>
-      <p>&nbsp;||&nbsp;</p>
-      <NavLink to="/" activeStyle={activeStyle} exact>
-        Gallery
-      </NavLink>
-      <p>&nbsp;||&nbsp;</p>
-      <NavLink to="/favorites" activeStyle={activeStyle} exact>
-        Favorites
-      </NavLink>
+      <HeaderLinks>
+        <NavLink to="/new" activeStyle={activeStyle} exact>
+          New Photo
+        </NavLink>
+        <p>&nbsp;||&nbsp;</p>
+        <NavLink to="/" activeStyle={activeStyle} exact>
+          Gallery
+        </NavLink>
+        <p>&nbsp;||&nbsp;</p>
+        <NavLink to="/favorites" activeStyle={activeStyle} exact>
+          Favorites
+        </NavLink>
+      </HeaderLinks>
     </StyledHeader>
   );
 }
@@ -56,4 +58,10 @@ const StyledHeader = styled.header`
   & h1 a {
     color: black;
   }
+`;
+
+const HeaderLinks = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
 `;

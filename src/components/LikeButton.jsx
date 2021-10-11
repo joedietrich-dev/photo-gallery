@@ -25,6 +25,7 @@ export const LikeOverlay = styled.button`
   width: 3rem;
   height: 3rem;
   display: flex;
+  padding: 0;
   align-items: center;
   justify-content: center;
   border-radius: 0 0 0 1rem;

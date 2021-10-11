@@ -4,11 +4,16 @@ import styled from "styled-components/macro";
 import ImageDetailsEdit from "./ImageDetailsEdit";
 import LikeButton, { LikeOverlay } from "./LikeButton";
 
-function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditImage = (f) => f }) {
+function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditImage = (f) => f, source = "/images" }) {
   const [image, setImage] = useState(null);
   const { path, url } = useRouteMatch();
   const { id } = useParams();
   const history = useHistory();
+
+  const nextImageIndex = images.findIndex((i) => i.id === image?.id) + 1;
+  const prevImageIndex = images.findIndex((i) => i.id === image?.id) - 1;
+  const doesNextExist = nextImageIndex < images.length;
+  const doesPrevExist = prevImageIndex >= 0;
 
   useEffect(() => {
     setImage(images.find((image) => image.id === parseInt(id, 10)));
@@ -29,6 +34,13 @@ function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditIma
       .catch((err) => console.log(err));
   };
 
+  const onNextClick = () => {
+    if (doesNextExist) history.push(`${source}/${images[nextImageIndex].id}`);
+  };
+  const onPrevClick = () => {
+    if (doesPrevExist) history.push(`${source}/${images[prevImageIndex].id}`);
+  };
+
   const showDetails = () => {
     if (!image) {
       if (images.length > 0) return <p>Image not found</p>;
@@ -36,12 +48,16 @@ function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditIma
     } else {
       return (
         <>
-          <NavButton area={"p"}>&lt;</NavButton>
+          <NavButton area={"p"} onClick={onPrevClick} disabled={!doesPrevExist}>
+            &lt;
+          </NavButton>
           <DetailCardImageHolder>
             <LikeButton image={image} handleEditImage={handleEditImage} />
+            <DetailCardImage src={image.imageUrl} alt={image.description} width="300" />
           </DetailCardImageHolder>
-          <DetailCardImage src={image.imageUrl} alt={image.description} width="300" />
-          <NavButton area={"n"}>&gt;</NavButton>
+          <NavButton area={"n"} onClick={onNextClick} disabled={!doesNextExist}>
+            &gt;
+          </NavButton>
           <Switch>
             <Route exact path={path}>
               <DetailCardDescription>
@@ -66,7 +82,9 @@ export default ImageDetails;
 
 const DetailCard = styled.div`
   display: grid;
-  grid: "p i n" ". d ." / min-content 1fr min-content;
+  grid: "p i n" auto ". d ." auto / min-content 1fr min-content;
+  max-width: 800px;
+  margin: 0 auto;
 `;
 
 const DetailCardDescription = styled.div`
@@ -90,11 +108,9 @@ const DetailCardImageHolder = styled.div`
 
 const NavButton = styled.button`
   grid-area: ${(props) => props.area};
-  padding: 0 2rem;
-  margin: 0;
+  padding: 0 1rem;
   background: none;
   border: 0;
-  transition: all 0.25s;
   cursor: pointer;
 
   &:hover {
