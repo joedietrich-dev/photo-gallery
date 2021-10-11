@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import Gallery from "./components/Gallery";
 import Header from "./components/Header";
-import ImageDetails from "./components/ImageDetails";
 import Main from "./components/Main";
 import NewPhoto from "./components/NewPhoto";
 import styled from "styled-components/macro";
@@ -35,17 +34,16 @@ function App() {
             <Route path="/new">
               <NewPhoto handleAddImage={handleAddImage} />
             </Route>
-            <Route path="/image/:id">
-              <ImageDetails images={images} handleDeleteImage={handleDeleteImage} handleEditImage={handleEditImage} />
+            <Route path="/images">
+              <Gallery images={images} handleEditImage={handleEditImage} handleDeleteImage={handleDeleteImage} />
               <AddImageActionArea handleAddImage={handleAddImage} />
             </Route>
             <Route path="/favorites">
-              <Gallery images={images.filter((image) => image.favorite)} handleEditImage={handleEditImage} />
+              <Gallery images={images.filter((image) => image.favorite)} handleEditImage={handleEditImage} handleDeleteImage={handleDeleteImage} />
               <AddImageActionArea handleAddImage={handleAddImage} />
             </Route>
             <Route path="/">
-              <Gallery images={images} handleEditImage={handleEditImage} />
-              <AddImageActionArea handleAddImage={handleAddImage} />
+              <Redirect to="/images" />
             </Route>
           </Switch>
         </Main>
