@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Switch, Route, useParams, useHistory, useRouteMatch, Link } from "react-router-dom";
+import { Route, useParams, useHistory, useRouteMatch, Link } from "react-router-dom";
 import styled from "styled-components/macro";
 import ImageDetailsEdit from "./ImageDetailsEdit";
 import LikeButton, { LikeOverlay } from "./LikeButton";
@@ -58,18 +58,18 @@ function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditIma
           <NavButton area={"n"} onClick={onNextClick} disabled={!doesNextExist}>
             &gt;
           </NavButton>
-          <Switch>
-            <Route exact path={path}>
-              <DetailCardDescription>
-                <p>{image.description}</p>
-                <Link to={`${url}/edit`}>Edit</Link>
-                <button onClick={handleDelete}>Delete</button>
-              </DetailCardDescription>
-            </Route>
-            <Route path={`${path}/edit`}>
+          <Route exact path={path}>
+            <DetailCardDescription>
+              <p>{image.description}</p>
+              <Link to={`${url}/edit`}>Edit</Link>
+              <button onClick={handleDelete}>Delete</button>
+            </DetailCardDescription>
+          </Route>
+          <Route path={`${path}/edit`}>
+            <DetailCardDescription>
               <ImageDetailsEdit image={image} handleEditImage={handleEditImage} />
-            </Route>
-          </Switch>
+            </DetailCardDescription>
+          </Route>
         </>
       );
     }

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components/macro";
 import ActionButton from "./ActionButton";
-import NewPhoto, { NewPhotoForm } from "./NewPhoto";
+import NewPhoto from "./NewPhoto";
+import StyledForm from "./StyledForm";
 
 function AddImageActionArea({ handleAddImage }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +32,7 @@ const ModalPopup = styled.div`
     margin-top: 0;
   }
 
-  & ${NewPhotoForm} {
+  & ${StyledForm} {
     padding: 0;
   }
 `;

@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { useHistory, Prompt } from "react-router-dom";
+import { useHistory, useLocation, useParams, useRouteMatch, Prompt } from "react-router-dom";
+import StyledForm from "./StyledForm";
 
 function ImageDetailsEdit({ image, handleEditImage = (f) => f }) {
   const [photoDetails, setPhotoDetails] = useState({ description: image.description });
   const history = useHistory();
 
   const hasFormChanged = photoDetails.description !== image.description;
+  const a = useLocation();
+  const b = useParams();
+  const c = useRouteMatch();
+  console.log(a, b, c);
 
   const handleFieldChange = (e) => {
     setPhotoDetails({
@@ -29,12 +34,12 @@ function ImageDetailsEdit({ image, handleEditImage = (f) => f }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       <label htmlFor="description">Description:</label>
       <input id="description" type="text" value={photoDetails.description} onChange={handleFieldChange} />
       <input type="submit" />
       <Prompt when={hasFormChanged} message="Your changes will not be saved" />
-    </form>
+    </StyledForm>
   );
 }
 

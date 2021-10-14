@@ -1,4 +1,4 @@
-import { Link, useRouteMatch, Route, Switch } from "react-router-dom";
+import { Link, useRouteMatch, Route } from "react-router-dom";
 import styled from "styled-components/macro";
 import ImageDetails from "./ImageDetails";
 import LikeButton, { LikeOverlay } from "./LikeButton";
@@ -6,7 +6,7 @@ import LikeButton, { LikeOverlay } from "./LikeButton";
 function Gallery({ images = [], handleEditImage = (f) => f, handleDeleteImage = (f) => f }) {
   let { path } = useRouteMatch();
   return (
-    <Switch>
+    <>
       <Route exact path={path}>
         <GalleryContainer>
           {images.map((image) => (
@@ -25,7 +25,7 @@ function Gallery({ images = [], handleEditImage = (f) => f, handleDeleteImage = 
       <Route path={`${path}/:id`}>
         <ImageDetails images={images} handleDeleteImage={handleDeleteImage} handleEditImage={handleEditImage} source={path} />
       </Route>
-    </Switch>
+    </>
   );
 }
 
