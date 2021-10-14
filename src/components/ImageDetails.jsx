@@ -61,8 +61,10 @@ function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditIma
           <Route exact path={path}>
             <DetailCardDescription>
               <p>{image.description}</p>
-              <Link to={`${url}/edit`}>Edit</Link>
-              <button onClick={handleDelete}>Delete</button>
+              <DetailCardDescriptionActions>
+                <Link to={`${url}/edit`}>Edit</Link>
+                <button onClick={handleDelete}>Delete</button>
+              </DetailCardDescriptionActions>
             </DetailCardDescription>
           </Route>
           <Route path={`${path}/edit`}>
@@ -89,6 +91,18 @@ const DetailCard = styled.div`
 
 const DetailCardDescription = styled.div`
   grid-area: d;
+`;
+
+const DetailCardDescriptionActions = styled.div`
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+
+  & button {
+    padding: 0.25rem;
+    border-radius: 0;
+    border: 1px solid;
+  }
 `;
 
 const DetailCardImage = styled.img`
