@@ -1,18 +1,30 @@
-import { Link, useRouteMatch, Route } from "react-router-dom";
+import { Link, useRouteMatch, useParams, Route } from "react-router-dom";
 import styled from "styled-components/macro";
 import ImageDetails from "./ImageDetails";
 import LikeButton, { LikeOverlay } from "./LikeButton";
 
 function Gallery({ images = [], handleEditImage = (f) => f, handleDeleteImage = (f) => f }) {
-  let { path } = useRouteMatch();
+  let { path, url } = useRouteMatch();
+  let { album } = useParams();
+
+  function filterImages(album) {
+    if (album === "favorites") {
+      return images.filter((image) => image.favorite);
+    } else {
+      return images;
+    }
+  }
+
+  const filteredImages = filterImages(album);
+
   return (
     <>
       <Route exact path={path}>
         <GalleryContainer>
-          {images.map((image) => (
+          {filteredImages.map((image) => (
             <GalleryImageTile key={image.id}>
               <LikeButton image={image} handleEditImage={handleEditImage} />
-              <Link to={`${path}/${image.id}`}>
+              <Link to={`${url}/${image.id}`}>
                 <GalleryImage src={image.imageUrl} alt={image.description} />
                 <GalleryOverlay>
                   <GalleryOverlayText>{image.description}</GalleryOverlayText>
@@ -22,8 +34,8 @@ function Gallery({ images = [], handleEditImage = (f) => f, handleDeleteImage = 
           ))}
         </GalleryContainer>
       </Route>
-      <Route path={`${path}/:id`}>
-        <ImageDetails images={images} handleDeleteImage={handleDeleteImage} handleEditImage={handleEditImage} source={path} />
+      <Route path={`/:album/:id`}>
+        <ImageDetails images={filteredImages} handleDeleteImage={handleDeleteImage} handleEditImage={handleEditImage} source={path} />
       </Route>
     </>
   );

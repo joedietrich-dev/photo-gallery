@@ -34,12 +34,8 @@ function App() {
             <Route path="/new">
               <NewPhoto handleAddImage={handleAddImage} />
             </Route>
-            <Route path="/images">
+            <Route path="/:album">
               <Gallery images={images} handleEditImage={handleEditImage} handleDeleteImage={handleDeleteImage} />
-              <AddImageActionArea handleAddImage={handleAddImage} />
-            </Route>
-            <Route path="/favorites">
-              <Gallery images={images.filter((image) => image.favorite)} handleEditImage={handleEditImage} handleDeleteImage={handleDeleteImage} />
               <AddImageActionArea handleAddImage={handleAddImage} />
             </Route>
             <Route path="/">

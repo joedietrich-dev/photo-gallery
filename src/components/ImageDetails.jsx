@@ -7,7 +7,7 @@ import LikeButton, { LikeOverlay } from "./LikeButton";
 function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditImage = (f) => f, source = "/images" }) {
   const [image, setImage] = useState(null);
   const { path, url } = useRouteMatch();
-  const { id } = useParams();
+  const { album, id } = useParams();
   const history = useHistory();
 
   const nextImageIndex = images.findIndex((i) => i.id === image?.id) + 1;
@@ -35,10 +35,10 @@ function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditIma
   };
 
   const onNextClick = () => {
-    if (doesNextExist) history.push(`${source}/${images[nextImageIndex].id}`);
+    if (doesNextExist) history.push(`/${album}/${images[nextImageIndex].id}`);
   };
   const onPrevClick = () => {
-    if (doesPrevExist) history.push(`${source}/${images[prevImageIndex].id}`);
+    if (doesPrevExist) history.push(`/${album}/${images[prevImageIndex].id}`);
   };
 
   const showDetails = () => {
