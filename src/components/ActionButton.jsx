@@ -13,6 +13,7 @@ const ActionButton = styled.button`
   bottom: 3rem;
   right: 3rem;
   cursor: pointer;
+  font-family: inherit;
 
   &:hover {
     background: hsl(0.3turn 25% 55% / 1);

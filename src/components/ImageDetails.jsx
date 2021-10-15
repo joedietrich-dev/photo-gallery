@@ -102,6 +102,7 @@ const DetailCardDescriptionActions = styled.div`
     padding: 0.25rem;
     border-radius: 0;
     border: 1px solid;
+    font-family: inherit;
   }
 `;
 
@@ -126,6 +127,8 @@ const NavButton = styled.button`
   background: none;
   border: 0;
   cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
 
   &:hover {
     background: white;
