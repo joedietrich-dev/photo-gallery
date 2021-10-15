@@ -10,6 +10,9 @@ const StyledForm = styled.form`
   label {
     margin-bottom: 0.25rem;
   }
+  input {
+    font-family: inherit;
+  }
   input:not([type="submit"]),
   textarea {
     margin-bottom: 0.75rem;
@@ -17,6 +20,7 @@ const StyledForm = styled.form`
 
   textarea {
     resize: none;
+    font-family: inherit;
   }
 
   input[type="submit"] {
