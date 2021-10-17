@@ -32,7 +32,7 @@ function ImageDetailsEdit({ image, handleEditImage = (f) => f }) {
   return (
     <StyledForm onSubmit={handleSubmit}>
       <label htmlFor="description">Description:</label>
-      <input id="description" type="text" value={photoDetails.description} onChange={handleFieldChange} />
+      <textarea id="description" rows="3" value={photoDetails.description} onChange={handleFieldChange} />
       <input type="submit" />
     </StyledForm>
   );

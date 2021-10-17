@@ -98,11 +98,14 @@ const DetailCardDescriptionActions = styled.div`
   gap: 2rem;
   align-items: center;
 
-  & button {
+  button {
     padding: 0.25rem;
     border-radius: 0;
     border: 1px solid;
     font-family: inherit;
+    :hover {
+      background-color: #e2e2e2;
+    }
   }
 `;
 
@@ -116,7 +119,7 @@ const DetailCardImageHolder = styled.div`
   width: 100%;
   position: relative;
 
-  &:hover ${LikeOverlay} {
+  :hover ${LikeOverlay} {
     opacity: 100%;
   }
 `;
@@ -130,7 +133,7 @@ const NavButton = styled.button`
   font-family: inherit;
   font-weight: bold;
 
-  &:hover {
+  :hover {
     background: white;
   }
 `;

@@ -4,7 +4,7 @@ import "./App.css";
 import Gallery from "./components/Gallery";
 import Header from "./components/Header";
 import Main from "./components/Main";
-import NewPhoto from "./components/NewPhoto";
+import NewImage from "./components/NewImage";
 import styled from "styled-components/macro";
 import AddImageActionArea from "./components/AddImageActionArea";
 
@@ -32,7 +32,7 @@ function App() {
         <Main>
           <Switch>
             <Route path="/new">
-              <NewPhoto handleAddImage={handleAddImage} />
+              <NewImage handleAddImage={handleAddImage} />
             </Route>
             <Route path="/:album">
               <Gallery images={images} handleEditImage={handleEditImage} handleDeleteImage={handleDeleteImage} />

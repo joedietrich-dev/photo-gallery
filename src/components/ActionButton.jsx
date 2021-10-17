@@ -1,6 +1,12 @@
 import styled from "styled-components/macro";
 
-const ActionButton = styled.button`
+export const ActionButtonText = styled.span`
+  display: inline-block;
+  transform: ${(props) => (props.isDialogOpen ? "rotate(45deg)" : "rotate(0deg)")};
+  transition: 0.2s;
+`;
+
+export const ActionButton = styled.button`
   border-radius: 50%;
   height: 3rem;
   width: 3rem;
@@ -14,11 +20,12 @@ const ActionButton = styled.button`
   right: 3rem;
   cursor: pointer;
   font-family: inherit;
+  transition: 0.2s;
 
-  &:hover {
+  :hover {
     background: hsl(0.3turn 25% 55% / 1);
   }
-  &:active {
+  :active {
     background: hsl(0.3turn 25% 85% / 1);
   }
 `;

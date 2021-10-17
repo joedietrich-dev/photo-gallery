@@ -7,12 +7,12 @@ const INITIAL_PHOTO = {
   favorite: false,
 };
 
-function NewPhoto({ handleAddImage }) {
-  const [newPhoto, setNewPhoto] = useState(INITIAL_PHOTO);
+function NewImage({ handleAddImage }) {
+  const [newImage, setNewImage] = useState(INITIAL_PHOTO);
 
   const handleFieldChange = (e) => {
-    setNewPhoto({
-      ...newPhoto,
+    setNewImage({
+      ...newImage,
       [e.target.id]: e.target.value,
     });
   };
@@ -24,22 +24,22 @@ function NewPhoto({ handleAddImage }) {
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(newPhoto),
+      body: JSON.stringify(newImage),
     })
       .then((res) => res.json())
       .then((newImage) => handleAddImage(newImage));
-    setNewPhoto(INITIAL_PHOTO);
+    setNewImage(INITIAL_PHOTO);
   };
 
   return (
     <StyledForm onSubmit={handleSubmit}>
       <label htmlFor="imageUrl">Image Url:</label>
-      <input id="imageUrl" type="url" value={newPhoto.imageUrl} onChange={handleFieldChange} required />
+      <input id="imageUrl" type="url" value={newImage.imageUrl} onChange={handleFieldChange} required />
       <label htmlFor="description">Description:</label>
-      <textarea id="description" type="text" rows="3" value={newPhoto.description} onChange={handleFieldChange} />
+      <textarea id="description" type="text" rows="3" value={newImage.description} onChange={handleFieldChange} />
       <input type="submit" />
     </StyledForm>
   );
 }
 
-export default NewPhoto;
+export default NewImage;

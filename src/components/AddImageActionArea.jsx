@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components/macro";
-import ActionButton from "./ActionButton";
-import NewPhoto from "./NewPhoto";
+import { ActionButton, ActionButtonText } from "./ActionButton";
+import NewImage from "./NewImage";
 import StyledForm from "./StyledForm";
 
 function AddImageActionArea({ handleAddImage }) {
@@ -11,10 +11,12 @@ function AddImageActionArea({ handleAddImage }) {
       {isOpen ? (
         <ModalPopup>
           <h2>New Image</h2>
-          <NewPhoto handleAddImage={handleAddImage} />
+          <NewImage handleAddImage={handleAddImage} />
         </ModalPopup>
       ) : null}
-      <ActionButton onClick={() => setIsOpen((val) => !val)}>{isOpen ? "×" : "+"}</ActionButton>
+      <ActionButton onClick={() => setIsOpen((val) => !val)}>
+        <ActionButtonText isDialogOpen={isOpen}>+</ActionButtonText>
+      </ActionButton>
     </div>
   );
 }
