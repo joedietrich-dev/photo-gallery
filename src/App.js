@@ -13,7 +13,11 @@ function App() {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_ENDPOINT_URL}/images`)
       .then((res) => res.json())
-      .then(setImages);
+      .then(setImages)
+      .catch((err) => {
+        setImages([]);
+        console.log(err);
+      });
   }, []);
 
   const handleAddImage = (image) => {

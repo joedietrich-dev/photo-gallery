@@ -27,7 +27,8 @@ function NewImage({ handleAddImage }) {
       body: JSON.stringify(newImage),
     })
       .then((res) => res.json())
-      .then((newImage) => handleAddImage(newImage));
+      .then((newImage) => handleAddImage(newImage))
+      .catch(console.log);
     setNewImage(INITIAL_PHOTO);
   };
 
