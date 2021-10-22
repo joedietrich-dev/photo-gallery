@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Route, useParams, useHistory, useRouteMatch, Link } from "react-router-dom";
 import styled from "styled-components/macro";
+import DeleteButton from "./DeleteButton";
 import ImageDetailsEdit from "./ImageDetailsEdit";
 import LikeButton, { LikeOverlay } from "./LikeButton";
 
@@ -18,21 +19,6 @@ function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditIma
   useEffect(() => {
     setImage(images.find((image) => image.id === parseInt(id, 10)));
   }, [images, id]);
-
-  const handleDelete = () => {
-    fetch(`${process.env.REACT_APP_ENDPOINT_URL}/images/${image.id}`, {
-      method: "DELETE",
-    })
-      .then((res) => {
-        if (res.ok) {
-          history.push("/");
-          handleDeleteImage(image);
-        } else {
-          throw new Error("Could not delete the requested resource");
-        }
-      })
-      .catch((err) => console.log(err));
-  };
 
   const onNextClick = () => {
     if (doesNextExist) history.push(`/${album}/${images[nextImageIndex].id}`);
@@ -63,7 +49,7 @@ function ImageDetails({ images = [], handleDeleteImage = (f) => f, handleEditIma
               <p>{image.description}</p>
               <DetailCardDescriptionActions>
                 <Link to={`${url}/edit`}>Edit</Link>
-                <button onClick={handleDelete}>Delete</button>
+                <DeleteButton handleDeleteImage={handleDeleteImage} image={image} />
               </DetailCardDescriptionActions>
             </DetailCardDescription>
           </Route>
