@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import "./App.css";
 import Gallery from "./components/Gallery";
 import Header from "./components/Header";
 import Main from "./components/Main";
